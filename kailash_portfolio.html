@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kailash | Senior Software Engineer</title>
+<style>
+:root{--bg:#0b1020;--card:#121a2d;--text:#eef2ff;--muted:#9aa7c2;--accent:#6ea8fe;--line:#24304a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+a{color:inherit;text-decoration:none}
+.container{width:min(1050px,92%);margin:auto}
+nav{position:sticky;top:0;z-index:10;background:rgba(11,16,32,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.25rem;font-weight:800}.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:24px;color:var(--muted);font-size:.92rem}
+.navlinks a:hover{color:var(--text)}
+.hero{min-height:calc(100vh - 70px);display:flex;align-items:center;padding:80px 0}
+.badge{display:inline-block;border:1px solid #30466f;color:#a9c8ff;background:#101b31;padding:7px 13px;border-radius:999px;font-size:.82rem;margin-bottom:22px}
+h1{font-size:clamp(3rem,8vw,6rem);line-height:.98;letter-spacing:-.06em;max-width:850px}
+h1 span{color:var(--accent)}
+.hero p{max-width:680px;color:var(--muted);font-size:1.08rem;margin:25px 0}
+.buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:11px 18px;border-radius:10px;border:1px solid var(--line);font-weight:700}
+.btn.primary{background:var(--accent);color:#08101f;border-color:var(--accent)}
+section{padding:85px 0;border-top:1px solid var(--line)}
+.eyebrow{color:var(--accent);font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+h2{font-size:2.1rem;margin:7px 0 28px}
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:45px}
+.about p{color:var(--muted);margin-bottom:15px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.stat strong{font-size:1.8rem;display:block}.stat small{color:var(--muted)}
+.skills{display:flex;flex-wrap:wrap;gap:10px}
+.skill{padding:9px 13px;background:var(--card);border:1px solid var(--line);border-radius:9px;color:#cbd6ed}
+.timeline{border-left:2px solid var(--line);padding-left:25px}
+.role{margin-bottom:30px;position:relative}
+.role:before{content:"";position:absolute;left:-32px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.role h3{font-size:1.2rem}.role .meta{color:var(--accent);font-size:.9rem}.role p{color:var(--muted);margin-top:8px}
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card h3{margin-bottom:8px}.card p{color:var(--muted);font-size:.94rem}.tags{margin-top:14px;color:#a9c8ff;font-size:.78rem}
+.contact{text-align:center}.contact p{color:var(--muted);max-width:600px;margin:0 auto 22px}
+footer{padding:30px 0;color:var(--muted);text-align:center;font-size:.85rem}
+@media(max-width:760px){
+.navlinks{display:none}.hero{padding:65px 0}.about,.projects{grid-template-columns:1fr}
+h1{font-size:3.5rem}.stats{margin-top:15px}
+}
+.project-card {
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.project-card h3 span {
+    color: var(--accent);
+}
+
+.project-card small {
+    display: block;
+    margin-top: 15px;
+    color: var(--accent);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.modal-content {
+    position: relative;
+    width: min(750px, 100%);
+    margin: 5vh auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 35px;
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+}
+
+.modal-content h3 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.modal-content p,
+.modal-content li {
+    color: var(--muted);
+}
+
+.modal-content ul {
+    padding-left: 20px;
+}
+
+.modal-content li {
+    margin-bottom: 8px;
+}
+
+.modal-content li::marker {
+    color: var(--accent);
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--text);
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="container nav">
+<a class="logo" href="#">Kailash A L</a>
+<div class="navlinks">
+<a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+</div>
+</div>
+</nav>
+
+<header class="hero container">
+<div>
+<div class="badge">OPEN TO NEW OPPORTUNITIES</div>
+<h1>Hi, I'm <span>Kailash A L</span><br>Software Engineer.</h1>
+<p>I build reliable enterprise web applications with <b>C#/.NET</b>, APIs and SQL Server, with hands-on experience across HRMS, E-Schedule and SSO products.</p>
+<div class="buttons">
+<a class="btn primary" href="#contact">Let's Connect →</a>
+<a class="btn" href="#experience">View Experience</a>
+</div>
+</div>
+</header>
+
+<section id="about">
+<div class="container">
+<div class="eyebrow">01 / About me</div><h2>A developer who likes solving real problems.</h2>
+<div class="about">
+<div>
+<p>I'm a Senior Software Engineer with 3+ years of experience building and supporting enterprise applications.</p>
+<p>My work includes feature development, bug fixing, REST API integration, performance optimization, testing, production support and deployments. I've contributed to HRMS, E-Schedule and SSO solutions used in business environments.</p>
+<p>I'm currently strengthening my frontend skills with React and looking for a product-focused engineering role where I can take more ownership and continue growing.</p>
+</div>
+<div class="stats">
+<div class="stat"><strong>3+</strong><small>Years Experience</small></div>
+<div class="stat"><strong>.NET</strong><small>Core Backend</small></div>
+<div class="stat"><strong>3</strong><small>Major Product Areas</small></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="skills">
+<div class="container">
+<div class="eyebrow">02 / Toolkit</div><h2>Technologies I work with.</h2>
+<div class="skills">
+<span class="skill">C#</span><span class="skill">ASP.NET</span><span class="skill">ASP.NET Core</span><span class="skill">Web API</span><span class="skill">REST APIs</span><span class="skill">SQL Server</span><span class="skill">Entity Framework</span><span class="skill">Angular</span><span class="skill">TypeScript</span><span class="skill">JavaScript</span><span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">Git</span><span class="skill">TFS</span><span class="skill">Azure</span><span class="skill">Postman</span>
+</div>
+</div>
+</section>
+
+<section id="experience">
+<div class="container">
+<div class="eyebrow">03 / Experience</div><h2>What I've been working on.</h2>
+<div class="timeline">
+<div class="role">
+<h3>Senior Software Engineer — DigiSME Pvt Ltd</h3>
+<div class="meta">Jun 2023 — Present · Product-based environment</div>
+<p>Developing and supporting enterprise HRMS and related products. Worked across Leave, Claims, Appraisal and HR modules, including payroll integration, enhancements, production bugs and API optimization.</p>
+<ul>
+    <li>Develop and maintain HRMS modules (Leave, Claims, Appraisal and HR) using ASP.NET Web Forms, C#, REST APIs and SQL Server.</li>
+    <li>Resolved 400+ production issues and implemented multiple customer enhancements.</li>
+    <li>Optimized REST APIs and SQL queries for better application performance.</li>
+    <li>Collaborated with QA and Business Analysts throughout SDLC. Used TFS for HRMS and Git for E-Schedule source control.</li>
+</ul>
+</div>
+<div class="role">
+<h3>E-Schedule & SSO Contributions</h3>
+<p>Contributed to E-Schedule and SSO-related changes using .NET Core, Angular, C# and APIs. Worked on authentication flows, customer/profile switching, integrations, testing and production support.</p>
+<ul>
+    <li>Integrated Angular-based E-Schedule Phase I with Malaysia HRMS Payroll for automated payroll calculation.</li>
+    <li>Resolved production issues in the Angular E-Schedule application and implemented SSO-related UI changes using Entity Framework.</li>
+    <li>Contributed to the development and maintenance of the Single Sign-On (SSO) application built using ASP.NET Core Razor Pages, C#, SQL Server and JWT Authentication.</li>
+    <li>Completed successful SSO production go-live and continue to deliver new enhancements and production bug fixes.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<section id="projects">
+<div class="container">
+<div class="eyebrow">04 / Product work</div><h2>Selected work.</h2>
+<div class="projects">
+<div class="card project-card" onclick="openProject('hrms')">
+    <h3>HRMS Platform <span>→</span></h3>
+    <p>Enterprise HRMS covering Leave, Claims, Appraisal and HR workflows with payroll integration.</p>
+    <div class="tags">C# · ASP.NET · SQL Server · Web API</div>
+    <small>Click to view details</small>
+</div>
+<div class="card project-card" onclick="openProject('sso')">
+    <h3>SSO <span>→</span></h3>
+    <p>
+        Single sign-on solution involving regional/customer switching
+        and profile-based access flows.
+    </p>
+    <div class="tags">
+        .NET Core · Razor Pages · Angular · JWT
+    </div>
+    <small>Click to view details</small>
+</div>
+<div class="card project-card" onclick="openProject('eschedule')">
+    <h3>E-Schedule <span>→</span></h3>
+    <p>
+        Employee scheduling and attendance solution integrated
+        with Malaysia HRMS.
+    </p>
+    <div class="tags">
+        Angular · C# · REST API
+    </div>
+    <small>View my contribution →</small>
+</div></div>
+</div>
+</section>
+
+<section id="contact" class="contact">
+<div class="container">
+<div class="eyebrow">05 / Let's connect</div><h2>Have an opportunity?</h2>
+<p>I'm interested in product-based software engineering roles where I can contribute, learn and take ownership of meaningful technical problems.</p>
+<div class="buttons" style="justify-content:center">
+<a class="btn primary" href="mailto:kailashal2002@gmail.com">Email Me</a>
+<a class="btn" href="https://www.linkedin.com/in/kailash-a-l-56a90b1ab/" target="_blank">LinkedIn</a>
+</div>
+</div>
+</section>
+
+<footer>© 2026 Kailash. All rights reserved</footer>
+<div id="hrms" class="modal">
+    <div class="modal-content">
+
+        <button class="close" onclick="closeProject('hrms')">&times;</button>
+
+        <div class="eyebrow">PROJECT / HRMS</div>
+
+        <h2>HRMS Platform</h2>
+
+        <p>
+            Enterprise HRMS platform supporting employee-related processes
+            across Leave, Claims, Appraisal and HR modules with payroll integration.
+        </p>
+
+        <h3>My Responsibilities</h3>
+
+        <ul>
+            <li>Developed and maintained HRMS modules using ASP.NET Web Forms, C#, REST APIs and SQL Server.</li>
+            <li>Resolved 400+ production issues and implemented multiple customer enhancements.</li>
+            <li>Optimized REST APIs and SQL queries for better application performance.</li>
+            <li>Worked on payroll integration involving leave, claims, overtime and appraisal data.</li>
+            <li>Performed unit testing, staging deployment, QA coordination and production releases.</li>
+        </ul>
+
+        <h3>Technologies</h3>
+
+        <div class="skills">
+            <span class="skill">C#</span>
+            <span class="skill">ASP.NET Web Forms</span>
+            <span class="skill">REST API</span>
+            <span class="skill">SQL Server</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">TFS</span>
+        </div>
+
+    </div>
+</div>
+<div id="sso" class="modal">
+    <div class="modal-content sso-popup">
+
+        <button class="close" onclick="closeProject('sso')">&times;</button>
+
+        <div class="eyebrow">PROJECT / SSO PHASE II</div>
+
+        <h2>Single Sign-On (SSO)</h2>
+
+        <p class="project-intro">
+            Contributed to an enterprise Single Sign-On solution that provides
+            seamless authentication and access across multiple company products.
+            The solution supports Regional Switch, Customer Switch and Profile
+            Switch based on user identity and account information.
+        </p>
+
+        <!-- Regional Switch -->
+        <div class="sso-section">
+            <h3>🌍 Regional Switch</h3>
+
+            <p>
+                Allows users to switch between different regional environments
+                from a common SSO experience. Based on the selected region,
+                the user is redirected to the appropriate regional product.
+            </p>
+
+            <div class="flow">
+                <span>User Login</span>
+                <b>→</b>
+                <span>Select Region</span>
+                <b>→</b>
+                <span>Regional Product</span>
+            </div>
+
+            <p class="example">
+                <strong>Example:</strong>
+                Malaysia → Malaysia HRMS &nbsp; | &nbsp;
+                Hong Kong → Hong Kong Product
+            </p>
+        </div>
+
+        <!-- Customer Switch -->
+        <div class="sso-section">
+            <h3>🏢 Customer Switch</h3>
+
+            <p>
+                Allows users who are associated with multiple customers or
+                organizations to switch between their available customer
+                environments without logging in again.
+            </p>
+
+            <div class="flow">
+                <span>Login</span>
+                <b>→</b>
+                <span>Select Customer</span>
+                <b>→</b>
+                <span>Customer Product</span>
+            </div>
+
+            <p class="example">
+                <strong>Example:</strong>
+                A user linked to multiple customer organizations can select
+                the required customer and access that customer's product
+                through the same SSO session.
+            </p>
+        </div>
+
+        <!-- Profile Switch -->
+        <div class="sso-section">
+            <h3>👤 Profile Switch</h3>
+
+            <p>
+                Supports users who have multiple profiles associated with the
+                same email address or mobile number. The system identifies the
+                appropriate profile using regional identity information.
+            </p>
+
+            <div class="identity-box">
+                <span>MYKAD</span>
+                <span>NRIC</span>
+                <span>HK ID</span>
+            </div>
+
+            <div class="flow profile-flow">
+                <span>Email / Mobile</span>
+                <b>→</b>
+                <span>MYKAD / NRIC / HK ID</span>
+                <b>→</b>
+                <span>Profile</span>
+                <b>→</b>
+                <span>Product</span>
+            </div>
+
+            <p class="example">
+                <strong>Example:</strong>
+                The same email or mobile number may be associated with
+                different profiles. The SSO identifies the user's
+                MYKAD / NRIC / HK ID and provides the appropriate profile
+                and product access.
+            </p>
+        </div>
+
+        <!-- Overall Flow -->
+        <div class="sso-section">
+            <h3>🔐 Overall SSO Flow</h3>
+
+            <div class="overall-flow">
+                <div>Login</div>
+                <span>↓</span>
+                <div>Identify User</div>
+                <span>↓</span>
+                <div>Regional Switch</div>
+                <span>↓</span>
+                <div>Customer / Profile Switch</div>
+                <span>↓</span>
+                <div>Redirect to Product</div>
+            </div>
+        </div>
+
+        <!-- Contribution -->
+        <div class="sso-section">
+            <h3>👨‍💻 My Contribution</h3>
+
+            <ul>
+                <li>Contributed to SSO Phase II development and enhancements.</li>
+                <li>Worked on Regional Switch, Customer Switch and Profile Switch functionality.</li>
+                <li>Worked with MYKAD, NRIC and HK ID based identity flows.</li>
+                <li>Implemented and supported changes using C#, .NET Core, Razor Pages and Angular.</li>
+                <li>Investigated and resolved SSO-related bugs and production issues.</li>
+                <li>Supported testing, debugging and deployment activities.</li>
+            </ul>
+        </div>
+
+        <!-- Technologies -->
+        <div class="sso-section">
+            <h3>🛠 Technologies</h3>
+
+            <div class="skills">
+                <span class="skill">C#</span>
+                <span class="skill">.NET Core</span>
+                <span class="skill">Razor Pages</span>
+                <span class="skill">Angular</span>
+                <span class="skill">TypeScript</span>
+                <span class="skill">REST API</span>
+                <span class="skill">JWT</span>
+                <span class="skill">SQL Server</span>
+                <span class="skill">Azure</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="eschedule" class="modal">
+
+    <div class="modal-content">
+
+        <button class="close" onclick="closeProject('eschedule')">
+            &times;
+        </button>
+
+        <div class="eyebrow">PROJECT / E-SCHEDULE</div>
+
+        <h2>E-Schedule</h2>
+
+        <p>
+            E-Schedule is an employee scheduling and attendance solution
+            integrated with the Malaysia HRMS platform.
+        </p>
+
+        <h3>My Contribution</h3>
+
+        <ul>
+            <li>Worked on E-Schedule related SSO changes and bug fixes.</li>
+            <li>Supported testing, debugging and issue resolution.</li>
+        </ul>
+
+        <h3>Technologies</h3>
+
+        <div class="skills">
+            <span class="skill">Angular</span>
+            <span class="skill">C#</span>
+            <span class="skill">REST API</span>
+            <span class="skill">SQL Server</span>
+            <span class="skill">Git</span>
+        </div>
+
+    </div>
+
+</div>
+<script>
+function openProject(projectId) {
+    document.getElementById(projectId).style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+
+function closeProject(projectId) {
+    document.getElementById(projectId).style.display = "none";
+    document.body.style.overflow = "auto";
+}
+
+window.onclick = function(event) {
+    if (event.target.classList.contains("modal")) {
+        event.target.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+}
+</script>
+</body>
+</html>
